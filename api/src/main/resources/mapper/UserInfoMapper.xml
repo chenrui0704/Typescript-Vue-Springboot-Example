@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.book.dao.UserInfoDao">
+
+    <select id="query" resultType="com.school.book.entity.UserInfo">
+        select id, name, login_name as loginName, password, status, input_id as inputId, input_time as inputTime, role from userinfo
+        <where>
+            <if test="id!=null ">
+                and id = #{id}
+            </if>
+            <if test="name!=null  and name!=''">
+                and name = #{name}
+            </if>
+            <if test="loginName!=null  and loginName!=''">
+                and login_name = #{loginName}
+            </if>
+            <if test="password!=null  and password!=''">
+                and password = #{password}
+            </if>
+            <if test="status!=null ">
+                and status = #{status}
+            </if>
+            <if test="inputId!=null ">
+                and input_id = #{inputId}
+            </if>
+            <if test="inputTime!=null  and inputTime!=''">
+                and input_time = #{inputTime}
+            </if>
+            and role = 1
+        </where>
+    </select>
+
+    <select id="login" resultType="com.school.book.entity.UserInfo">
+        select id, name, login_name as loginName, password, status, input_id as inputId, input_time as inputTime, role from userinfo
+        where login_name = #{loginName}
+        and password = #{password}
+        and status = 0
+    </select>
+
+
+    <select id="queryById" resultType="com.school.book.entity.UserInfo">
+        select * from userinfo
+        where id = #{id}
+    </select>
+
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" keyColumn="id" parameterType="com.school.book.entity.UserInfo">
+        INSERT INTO userinfo
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            name,
+            login_name,
+            password,
+            status,
+            input_id,
+            input_time,
+            role,
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            #{name},
+            #{loginName},
+            #{password},
+            #{status},
+            #{inputId},
+            #{inputTime},
+            #{role},
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.school.book.entity.UserInfo">
+        update  userinfo
+        <set>
+            <if test="name!=null   and name!='' ">
+                name = #{name},
+            </if>
+            <if test="loginName!=null   and loginName!='' ">
+                login_name = #{loginName},
+            </if>
+            <if test="password!=null   and password!='' ">
+                password = #{password},
+            </if>
+            <if test="status!=null   ">
+                status = #{status},
+            </if>
+            <if test="inputId!=null   ">
+                input_id = #{inputId},
+            </if>
+            <if test="inputTime!=null   and inputTime!='' ">
+                input_time = #{inputTime},
+            </if>
+            <if test="role!=null   and role!='' ">
+                role = #{role},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="operateStatus" parameterType="com.school.book.entity.UserInfo">
+        update  userinfo
+        set status = #{status}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" >
+        DELETE FROM userinfo
+        where id = #{id}
+   </delete>
+
+    <delete id="delete"  parameterType="com.school.book.entity.UserInfo">
+    DELETE FROM userinfo
+    where id = #{id}
+    </delete>
+
+
+</mapper>
+
