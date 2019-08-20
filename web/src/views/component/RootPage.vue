@@ -3,9 +3,9 @@
 </style>
 <template>
     <div>
-        <p>
+        <h1>
             Hello , Welcome to this a page , This is a root page。
-        </p>
+        </h1>
     </div>
 </template>
 

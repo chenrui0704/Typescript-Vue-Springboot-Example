@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 export const routers = new VueRouter({routes:router});
 
 // 控制判断
-routers.beforeEach(( to, from, next ) => {
+routers.beforeEach((to, from, next) => {
     next();
 });
 

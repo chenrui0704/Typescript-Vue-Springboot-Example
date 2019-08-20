@@ -29,24 +29,11 @@
     @Component
     export default class Menus extends Vue{
 
-        public menuList:any = [];
+        menuList:any = [];
 
         created() {
-            let that = this;
-            let index = 0;
-            let userinfo = JSON.parse(this.$Cookies.get('userinfo'));
-            let role = Number(userinfo.role);
-            for(let i = 0; i< this.$MenuList.length; i++){
-                // this.menuList[index] = this.$MenuList[i];
-                let roles = that.$MenuList[i].role;
-                for(let j = 0; j < roles.length; j++){
-                    if(roles[j] == role){
-                        that.menuList[index] = that.$MenuList[i];
-                        index++;
-                        break;
-                    }
-                }
-            }
+            let role = Number(JSON.parse(this.$Cookies.get('userinfo')).role);
+            this.$MenuList.forEach(x => { x.role.includes(role) ? this.menuList.push(x) : null; });
         }
 
     }

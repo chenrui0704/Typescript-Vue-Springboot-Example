@@ -4,11 +4,7 @@ export  default  {
 
     install(Vue){
         let list = [];
-        for(let i = 0; i < menuRouter.length; i++){
-            if( undefined != menuRouter[i].role && null != menuRouter[i].role ){
-                list.push(menuRouter[i]);
-            }
-        }
+        menuRouter.forEach(x => { undefined != x.role && null != x.role ? list.push(x) : null; });
         Vue.prototype.$MenuList = list;
     }
 
