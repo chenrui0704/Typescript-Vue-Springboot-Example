@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<main>
+    <sql id="query">
+        select * from book
+        where 1=1
+        [and name like '%#{name}%']
+        [and id = #{id}]
+        [and title = #{title} ]
+        [and id = (select id from book where id = #{id})]
+    </sql>
+</main>

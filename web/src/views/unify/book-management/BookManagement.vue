@@ -50,8 +50,11 @@
 
         queryAll(){
             let that = this;
-            that.$ajax.post(that.$address + 'book/queryAll',{}).then(re =>{
+            /*that.$ajax.post(that.$address + 'book/queryAll',{}).then(re =>{
                 that.data = re.data;
+            });*/
+            that.$ajax.post(that.$address + 'querySql/queryBook',{}).then(re =>{
+                that.data = re.data.bookquery;
             });
         }
 
